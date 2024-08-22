@@ -227,6 +227,53 @@ class TeamModel {
 	favoriteTeams(params, result) {
 
 	}
+
+	editTeam(params, result) {
+		const { id, city, homeArena, logo, manager, partition, teamName } = params;
+		let setClause = 'SET ';
+		let values = [];
+		if (city) {
+			setClause += `city = ?, `
+			values.push(city);
+		}
+		if (homeArena) {
+			setClause += `homeArena = ?, `
+			values.push(homeArena);
+		}
+		if (logo) {
+			setClause += `logo = ?, `
+			values.push(logo);
+		}
+		if (manager) {
+			setClause += `manager = ?, `
+			values.push(manager);
+		}
+		if (partition) {
+			setClause += `\`partition\` = ?, `
+			values.push(partition);
+		}
+		if (teamName) {
+			setClause += `teamName = ?, `
+			values.push(teamName);
+		}
+		setClause = setClause.slice(0, -2);
+		// 获取当前 Unix 时间戳
+		const updateTime = Math.floor(new Date().getTime() / 1000);
+		setClause += `, update_time = FROM_UNIXTIME(?)`;
+		values.push(updateTime);
+		const SQL = `UPDATE team ${setClause} WHERE teamId = ?`;
+		values.push(id);
+		sql.query(SQL, values, (err) => {
+			if (!err) {
+				result(null, { success: true, msg: 'edit success', code: 200 });
+			} else {
+				result({
+					errorMeg: err.sqlMessage,
+					success: false,
+				}, null);
+			}
+		})
+	}
 }
 
 module.exports = TeamModel;

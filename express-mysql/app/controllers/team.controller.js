@@ -69,3 +69,13 @@ exports.favoriteTeams = (req, res) => {
 	});
 }
 
+exports.editTeam = (req, res) => {
+	const data = req.body;
+	teamInstance.editTeam(data, (err, result) => {
+		if (err) {
+			res.send(err)
+		} else {
+			res.send(result);
+		}
+	});
+}

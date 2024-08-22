@@ -7,5 +7,6 @@ module.exports = app => {
 	router.get('/getTeamsWithoutUserId', team.getTeamsWithoutUserId);
 	router.post('/createTeam', team.createTeam);
 	router.post('/favoriteTeams', team.favoriteTeams);
+	router.post('/editTeam', team.editTeam)
 	app.use('/api', router);
 };

@@ -9,6 +9,7 @@ interface IProps {
    open: boolean;
    onClose: () => void;
    values: any;
+   onSubmit: (value: any) => void;
 }
 
 const formLayout = {
@@ -17,7 +18,7 @@ const formLayout = {
 };
 
 export default (props: IProps) => {
-   const { open, onClose, values } = props;
+   const { open, onClose, values, onSubmit } = props;
    const [form] = Form.useForm();
    const formValus = form.getFieldsValue();
 
@@ -27,27 +28,53 @@ export default (props: IProps) => {
       }
    }, [form, open, values]);
 
+   const onOk = async () => {
+      form.validateFields().then((res) => {
+         onSubmit(res);
+      });
+   };
+
    return (
-      <Modal open={open} onCancel={onClose} title="球队编辑">
+      <Modal open={open} onCancel={onClose} title="球队编辑" onOk={onOk}>
          <Form {...formLayout} form={form}>
             <div className="edit-team-logo">
                <Form.Item noStyle name="logo">
                   <UploadImage value={formValus?.logo} />
                </Form.Item>
             </div>
-            <Form.Item label="球队名称" name="teamName">
+            <Form.Item
+               label="球队名称"
+               name="teamName"
+               rules={[{ required: true, message: "请输入球队名称" }]}
+            >
                <Input />
             </Form.Item>
-            <Form.Item label="主教练" name="manager">
+            <Form.Item
+               label="主教练"
+               name="manager"
+               rules={[{ required: true, message: "请输入主教练" }]}
+            >
                <Input />
             </Form.Item>
-            <Form.Item label="主场球馆" name="homeArena">
+            <Form.Item
+               label="主场球馆"
+               name="homeArena"
+               rules={[{ required: true, message: "请输入主场球馆" }]}
+            >
                <Input />
             </Form.Item>
-            <Form.Item label="所在城市" name="city">
+            <Form.Item
+               label="所在城市"
+               name="city"
+               rules={[{ required: true, message: "请选择所在城市" }]}
+            >
                <TreeSelect treeData={AMERICA_CITY_DATA} />
             </Form.Item>
-            <Form.Item label="所在分区" name="partition">
+            <Form.Item
+               label="所在分区"
+               name="partition"
+               rules={[{ required: true, message: "请选择所在分区" }]}
+            >
                <Select options={PARTTITION_DATA} />
             </Form.Item>
          </Form>

@@ -14,7 +14,6 @@ import { PositionEnum } from "@/constan";
 import "./index.scss";
 
 interface TeamDetailType extends TeamItem {}
-
 function TeamDetail() {
    const params = useParams();
    const { id } = params || {};
@@ -108,6 +107,17 @@ function TeamDetail() {
    };
 
    const onEditTeam = () => setTeamEditModal(true);
+   const onSubmitEditTeam = async (values: any) => {
+      const res = await http("post", "/api/editTeam", { id, ...values });
+      const { success } = res;
+      if (success) {
+         message.success("Team updated successfully!");
+         await getTeamDetail(id);
+         setTeamEditModal(false);
+      } else {
+         message.error("Failed to update team!");
+      }
+   };
 
    const columns = [
       {
@@ -254,6 +264,7 @@ function TeamDetail() {
                open={teamEditModal}
                onClose={() => setTeamEditModal(false)}
                values={teamDetail}
+               onSubmit={onSubmitEditTeam}
             />
          </Spin>
       </div>
