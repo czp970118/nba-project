@@ -20,3 +20,8 @@ export enum ModalModeEnum {
 	CREATE = 'create',
 	EDIT = 'edit'
 }
+
+export enum TeamDetailTabEnum {
+	PLAYERS = 'players',
+	COURSE = 'course'
+}

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Spin, Table, Form, Modal, message, Tag, Space, Button, Breadcrumb } from "antd";
+import { Spin, Table, Form, Modal, message, Tag, Space, Button, Breadcrumb, Tabs } from "antd";
 import PlayerModal from "../../../components/player-modal";
 import { useParams } from "react-router-dom";
 import http from "@/request/http";
 import { TeamItem, TableParams, ModalMode } from "@/types";
-import { ParttitionEnum, ModalModeEnum } from "@/enum";
+import { ParttitionEnum, ModalModeEnum, TeamDetailTabEnum } from "@/enum";
 import { useAntdTable } from "ahooks";
 import HeadFilter from "@/components/head-filter";
 import TeamChart from "@/components/team-chart";
@@ -14,6 +14,8 @@ import { PositionEnum } from "@/constan";
 import "./index.scss";
 
 interface TeamDetailType extends TeamItem {}
+type TabKeys = "players" | "course";
+
 function TeamDetail() {
    const params = useParams();
    const { id } = params || {};
@@ -24,6 +26,7 @@ function TeamDetail() {
    const [modalMode, setModalMode] = useState<ModalMode>(ModalModeEnum.CREATE);
    const [playerModalInitValues, setPlayerModalInitValues] = useState<any>({});
    const [teamEditModal, setTeamEditModal] = useState<boolean>(false);
+   const [tabKeys, setTabKeys] = useState<TabKeys>(TeamDetailTabEnum.PLAYERS);
 
    const getTeamDetail = async (id: number) => {
       setLoading(true);
@@ -243,13 +246,24 @@ function TeamDetail() {
                      </div>
                   </div>
                   <div className="team-player-table">
-                     <HeadFilter onCreate={onCreateClick} />
-                     <Table
-                        style={{ width: "100%" }}
-                        {...tableProps}
-                        columns={columns as any}
-                        rowKey="id"
-                     />
+                     <Tabs
+                        onChange={(key: any) => {
+                           setTabKeys(key);
+                        }}
+                        defaultActiveKey={TeamDetailTabEnum.PLAYERS}
+                        activeKey={tabKeys}
+                     >
+                        <Tabs.TabPane tab="关联球员" key={TeamDetailTabEnum.PLAYERS}>
+                           <HeadFilter onCreate={onCreateClick} />
+                           <Table
+                              style={{ width: "100%" }}
+                              {...tableProps}
+                              columns={columns as any}
+                              rowKey="id"
+                           />
+                        </Tabs.TabPane>
+                        <Tabs.TabPane tab="球队赛程" key={TeamDetailTabEnum.COURSE}></Tabs.TabPane>
+                     </Tabs>
                   </div>
                </div>
             </Form>

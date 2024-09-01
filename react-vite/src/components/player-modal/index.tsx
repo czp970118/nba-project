@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Modal, Input, Select, InputNumber } from "antd";
+import { Form, Modal, Input, Select, InputNumber, Radio } from "antd";
 import UploadImage from "@/components/upload";
 import { POSITION_DATASOURCE } from "@/constan";
 import { ModalMode } from "@/types";
@@ -22,7 +22,6 @@ const formLayout = {
 const PlayerModal = (props: IProps) => {
    const { open, onClose, onOk, initValues, mode } = props;
    const [form] = Form.useForm();
-
    const onSubmit = async () => {
       form
          .validateFields()
@@ -39,7 +38,7 @@ const PlayerModal = (props: IProps) => {
    };
 
    useEffect(() => {
-      form.setFieldsValue(initValues);
+      form.setFieldsValue({ ...initValues, activService: true });
    }, [initValues]);
 
    return (
@@ -77,6 +76,12 @@ const PlayerModal = (props: IProps) => {
             </Form.Item>
             <Form.Item name="age" label="年龄">
                <InputNumber min={1} style={{ width: 150 }} />
+            </Form.Item>
+            <Form.Item name="activService" label="现役球员">
+               <Radio.Group>
+                  <Radio value={true}>是</Radio>
+                  <Radio value={false}>否</Radio>
+               </Radio.Group>
             </Form.Item>
             <Form.Item name="capability" label="能力值">
                <InputNumber min={1} style={{ width: 150 }} />

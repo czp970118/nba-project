@@ -9,7 +9,7 @@ type FieldType = {
 };
 
 interface IProps {
-   fieldItems: FieldType[];
+   fieldItems?: FieldType[];
    onCreate: () => void;
 }
 
