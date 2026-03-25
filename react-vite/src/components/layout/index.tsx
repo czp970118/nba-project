@@ -71,16 +71,9 @@ const BaseLayout: React.FC<IProp> = (props: IProp) => {
                }}
                items={[
                   {
-                     key: "team",
+                     key: "team/center",
                      icon: <FlagOutlined />,
                      label: "球队管理",
-                     children: [
-                        {
-                           key: "team/center",
-                           label: "球队中心",
-                           icon: <CrownOutlined />,
-                        },
-                     ],
                   },
                   {
                      key: "/player",

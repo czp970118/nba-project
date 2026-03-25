@@ -5,16 +5,20 @@ import { LoadingOutlined, PlusOutlined, DeleteOutlined, EyeOutlined } from "@ant
 import "./index.scss";
 
 const uploadUrl = "http://localhost:8081/upload";
-const beforeUpload = (file: any) => {
-   const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-   if (!isJpgOrPng) {
-      message.error("You can only upload JPG/PNG file!");
+
+const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp", "image/svg+xml"];
+
+const beforeUpload = (file: File) => {
+   const typeOk =
+      ALLOWED_IMAGE_TYPES.includes(file.type) || /\.(jpe?g|png|webp|svg)$/i.test(file.name);
+   if (!typeOk) {
+      message.error("仅支持 JPG、PNG、WebP、SVG 格式");
    }
    const isLt10M = file.size / 1024 / 1024 < 10;
    if (!isLt10M) {
-      message.error("Image must smaller than 10MB!");
+      message.error("图片需小于 10MB");
    }
-   return isJpgOrPng && isLt10M;
+   return typeOk && isLt10M;
 };
 
 interface IProps {
@@ -82,7 +86,7 @@ const UploadImage = (props: IProps) => {
          showUploadList={false}
          listType="picture-card"
          className="avatar-uploader"
-         accept="image"
+         accept="image/jpeg,image/png,image/webp,image/svg+xml,.jpg,.jpeg,.png,.webp,.svg"
          openFileDialogOnClick={!imageUrl}
          disabled={disabled}
       >

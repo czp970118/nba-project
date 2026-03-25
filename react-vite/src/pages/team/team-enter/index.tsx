@@ -13,7 +13,7 @@ interface Res {
    message: string;
 }
 
-const DEFAULT_PAGE_SIZE = 11;
+const DEFAULT_PAGE_SIZE = 17;
 function TeamCenter() {
    const [form] = Form.useForm();
    const [activeKey, setActiveKey] = useState<TabKey>(TeamCenterKeyEnum.ALL);
@@ -118,6 +118,7 @@ function TeamCenter() {
                }}
                total={total}
                current={current}
+               pageSize={DEFAULT_PAGE_SIZE}
                showQuickJumper
             />
          </Spin>

@@ -2,6 +2,7 @@ const User = require('../models/user.model.js');
 const { Permissions } = require('../../constan.js');
 
 exports.login = (req, res) => {
+	console.log('到这里');
 	if (!req.body) {
 		res.status(400).send({
 			message: "Content can not be empty!"

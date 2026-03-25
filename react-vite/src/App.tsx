@@ -38,7 +38,7 @@ function App() {
    }
    return (
       <UserRedirect>
-         <BaseStoreContext.Provider value={baseStore}>
+         <BaseStoreContext.Provider value={baseStore as CommonBaseStore}>
             <div className="contenter">
                <BaseLayout>
                   <Routes>

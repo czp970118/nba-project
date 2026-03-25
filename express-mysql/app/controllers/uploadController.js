@@ -29,6 +29,7 @@ const uploadController = async (req, res) => {
 		const result = await client.put(`${Date.now()}-${file.originalname}`, file.buffer);
 		res.send({ url: result.url, name: result.name }); // 返回文件的URL
 	} catch (error) {
+		console.error('[upload] OSS error:', error.code || error.name, error.message);
 		res.status(500).send({ error: '上传失败' });
 	}
 }

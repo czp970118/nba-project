@@ -1,5 +1,4 @@
 const { Controller } = require('egg');
-const jwt = require('jsonwebtoken');
 
 class UserController extends Controller {
 	async getUserInfo() {
@@ -32,7 +31,7 @@ class UserController extends Controller {
 		} catch (error) {
 			ctx.body = {
 				success: false,
-				message: err.message,
+				message: error.message,
 			};
 		}
 	}
