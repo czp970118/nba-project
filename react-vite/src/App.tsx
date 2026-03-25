@@ -36,6 +36,8 @@ function App() {
    if (loading) {
       return <Spin spinning={loading} />;
    }
+
+   console.log("baseStore", baseStore);
    return (
       <UserRedirect>
          <BaseStoreContext.Provider value={baseStore as CommonBaseStore}>

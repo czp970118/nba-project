@@ -1,7 +1,10 @@
+const path = require("path");
 const express = require("express");
 const multer = require('multer');
 const uploadController = require('./app/controllers/uploadController')
 const app = express();
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // 解决跨域问题
 app.use("*", function (req, res, next) {

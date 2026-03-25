@@ -50,7 +50,8 @@ const UploadImage = (props: IProps) => {
             setLoading(false);
             onChange && onChange(url);
          } else if (info.file.status === "error") {
-            message.error("上传失败");
+            const res = info.file.response as { error?: string } | undefined;
+            message.error(res?.error || "上传失败");
             setLoading(false);
          }
       },
