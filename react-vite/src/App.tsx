@@ -13,6 +13,7 @@ import PlayerCenter from "./pages/player/player-center";
 import TeamCreate from "./pages/team/team-create";
 import ContextStudy from "./pages/study/context-study";
 import TeamDetail from "./pages/team/team-detail";
+import PlayerDetail from "./pages/player/player-detail";
 import "./App.css";
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
                      <Route path="player/cards" element={<PlayerCards />} />
                      <Route path="user/info" element={<UserInfo />} />
                      <Route path="player/center" element={<PlayerCenter />} />
+                     <Route path="player/detail/:id" element={<PlayerDetail />} />
                      <Route path="study/context" element={<ContextStudy />} />
                   </Routes>
                </BaseLayout>

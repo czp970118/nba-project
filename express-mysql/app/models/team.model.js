@@ -207,21 +207,33 @@ class TeamModel {
 		}
 	}
 	createTeam(params, result) {
-		const INSERTSQL = generateInsertSql('team', params);
-		try {
-			sql.query(INSERTSQL, params, (err, res) => {
-				if (!err) {
-					result(null, { success: true, msg: 'created success', code: 200 });
-				} else {
-					result({
-						errorMeg: err.sqlMessage,
-						success: false,
-					}, null);
-				}
-			})
-		} catch (err) {
-			result(err, null);
+		const { teamName } = params;
+		if (!teamName) {
+			return result({ errorMeg: '缺少球队名称', success: false }, null);
 		}
+		sql.query('SELECT teamId FROM team WHERE teamName = ? LIMIT 1', [teamName], (dupErr, rows) => {
+			if (dupErr) {
+				return result({ errorMeg: dupErr.sqlMessage, success: false }, null);
+			}
+			if (rows && rows.length) {
+				return result(null, { success: false, errorMeg: '球队名称已存在' });
+			}
+			const INSERTSQL = generateInsertSql('team', params);
+			try {
+				sql.query(INSERTSQL, params, (err, res) => {
+					if (!err) {
+						result(null, { success: true, msg: 'created success', code: 200 });
+					} else {
+						result({
+							errorMeg: err.sqlMessage,
+							success: false,
+						}, null);
+					}
+				});
+			} catch (err) {
+				result(err, null);
+			}
+		});
 	}
 
 	favoriteTeams(params, result) {

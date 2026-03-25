@@ -1,0 +1,3 @@
+-- 去重并确认无重复队名后执行，防止再次插入同名球队：
+-- mysql -u root -p nba < scripts/unique-teamname.sql
+-- ALTER TABLE `team` ADD UNIQUE KEY `uk_team_name` (`teamName`);

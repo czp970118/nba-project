@@ -5,7 +5,11 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "seed:teams": "node scripts/seed-nba-teams.js",
+    "dedupe:teams": "node scripts/dedupe-teams.js",
+    "reset:teams": "node scripts/reset-and-seed-teams.js",
+    "seed:players": "node scripts/seed-players.js"
   },
   "keywords": [
     "nodejs",

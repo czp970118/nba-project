@@ -1,4 +1,37 @@
-.player-card-wrap {
+.player-center-page {
+	min-height: 400px;
+	padding-bottom: 24px;
+}
+
+.player-center-header {
+	margin-bottom: 24px;
+}
+
+.player-center-title {
+	margin: 0 0 8px;
+	font-size: 22px;
+	font-weight: 700;
+	color: #0f172a;
+}
+
+.player-center-subtitle {
+	margin: 0;
+	font-size: 14px;
+	color: #64748b;
+}
+
+.player-center-empty {
+	margin: 48px 0;
+}
+
+.player-center-grid {
+	width: 100%;
+}
+
+.player-center-grid .ant-col {
 	display: flex;
-	flex-wrap: wrap;
+}
+
+.player-center-grid .ant-col > .player-card {
+	max-width: none;
 }

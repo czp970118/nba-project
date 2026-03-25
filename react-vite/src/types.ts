@@ -23,3 +23,15 @@ export enum TeamCenterKeyEnum {
 }
 
 export type TabKey = "all" | "my";
+
+export interface PlayerItem {
+	id: number;
+	name: string;
+	teamId: number | null;
+	age?: number;
+	number?: number;
+	position?: string;
+	capability?: number;
+	introduction?: string;
+	avatar?: string;
+}

@@ -85,6 +85,65 @@ export const AMERICA_CITY_DATA = [
 			{
 				"title": "纽约市",
 				"value": "new_york_city"
+			},
+			{
+				"title": "布鲁克林",
+				"value": "brooklyn"
+			}
+		]
+	},
+	{
+		"title": "马萨诸塞州",
+		"value": "massachusetts",
+		"selectable": false,
+		"children": [
+			{
+				"title": "波士顿",
+				"value": "boston"
+			}
+		]
+	},
+	{
+		"title": "安大略省",
+		"value": "ontario",
+		"selectable": false,
+		"children": [
+			{
+				"title": "多伦多",
+				"value": "toronto"
+			}
+		]
+	},
+	{
+		"title": "北卡罗来纳州",
+		"value": "north_carolina",
+		"selectable": false,
+		"children": [
+			{
+				"title": "夏洛特",
+				"value": "charlotte"
+			}
+		]
+	},
+	{
+		"title": "威斯康星州",
+		"value": "wisconsin",
+		"selectable": false,
+		"children": [
+			{
+				"title": "密尔沃基",
+				"value": "milwaukee"
+			}
+		]
+	},
+	{
+		"title": "路易斯安那州",
+		"value": "louisiana",
+		"selectable": false,
+		"children": [
+			{
+				"title": "新奥尔良",
+				"value": "new_orleans"
 			}
 		]
 	},
@@ -222,12 +281,12 @@ export const AMERICA_CITY_DATA = [
 	},
 	{
 		"title": "亚利桑那州",
-		"value": "alabama",
+		"value": "arizona",
 		"selectable": false,
 		"children": [
 			{
-				"title": "凤凰城",
-				"value": "montgomery"
+				"title": "菲尼克斯",
+				"value": "phoenix"
 			}
 		]
 	},

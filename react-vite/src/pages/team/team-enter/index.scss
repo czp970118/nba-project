@@ -1,9 +1,13 @@
 .team-center {
 	height: 100%;
+	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
 	background-color: #fff;
 	padding-bottom: 16px;
 
 	.team-tabs {
+		width: 100%;
 		background-color: #fff;
 		padding: 16px;
 		height: 100%;
@@ -32,30 +36,33 @@
 	}
 
 	.team-wrap {
+		width: 100%;
+		max-width: 100%;
+		box-sizing: border-box;
 		background-color: #fff;
 
 		.team-card-list {
 			display: grid;
-			/* 默认随宽度换列；大屏（≥1200px）固定一行 8 个 */
-			grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
-			gap: 16px;
+			/* 单列最小宽度越大卡片越大；可按需改 260～320 */
+			grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+			gap: 20px;
 			padding: 0 clamp(12px, 2vw, 24px);
 			width: 100%;
 			box-sizing: border-box;
 
-			@media (min-width: 1200px) {
-				grid-template-columns: repeat(8, minmax(0, 1fr));
-			}
+			align-items: stretch;
 
 			.team-card-wrap {
 				min-width: 0;
+				height: 100%;
+				min-height: 260px;
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
 				align-items: center;
 				border: 1px solid #eee;
 				border-radius: 12px;
-				min-height: 200px;
+				box-sizing: border-box;
 				transition: transform 0.3s ease-in-out, border-color 0.3s ease-in-out;
 				cursor: pointer;
 
@@ -68,6 +75,10 @@
 
 			.card-wrap {
 				min-width: 0;
+				display: flex;
+				flex-direction: column;
+				height: 100%;
+				align-self: stretch;
 			}
 		}
 	}

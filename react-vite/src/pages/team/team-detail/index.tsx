@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Spin, Table, Form, Modal, message, Tag, Space, Button, Breadcrumb, Tabs } from "antd";
 import PlayerModal from "../../../components/player-modal";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import http from "@/request/http";
 import { TeamItem, TableParams, ModalMode } from "@/types";
 import { ParttitionEnum, ModalModeEnum, TeamDetailTabEnum } from "@/enum";
@@ -62,13 +62,13 @@ function TeamDetail() {
    const onCreateOrEdit = async (values: any) => {
       const api = modalMode === ModalModeEnum.CREATE ? "/api/createPlayer" : "/api/updatePlayer";
       const res: any = await http("post", api, { ...values, teamId: id });
-      const { success, errMsg } = res;
+      const { success, msg, message: errMessage } = res;
       if (success) {
          message.success(modalMode === ModalModeEnum.CREATE ? "创建成功" : "编辑成功");
          setCreateModal(false);
          submit();
       } else {
-         message.error(errMsg);
+         message.error(msg || errMessage || "操作失败");
       }
    };
 
@@ -127,6 +127,9 @@ function TeamDetail() {
          title: "姓名",
          dataIndex: "name",
          align: "center",
+         render: (_: string, record: { id: number; name: string }) => (
+            <Link to={`/pages/player/detail/${record.id}`}>{record.name}</Link>
+         ),
       },
       {
          title: "年龄",
